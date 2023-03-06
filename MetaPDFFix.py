@@ -19,6 +19,9 @@ def organizeMergedFiles(pdf, output_dir, filename):
 
     if (createDirIfNotExist(output_dir) == False):
         return
+    
+    for page in pdf:
+            page.clean_contents()
 
     pdf.save(path.join(output_dir,filename))    
     return
