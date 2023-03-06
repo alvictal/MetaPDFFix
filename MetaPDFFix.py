@@ -23,7 +23,13 @@ def organizeMergedFiles(pdf, output_dir, filename):
     for page in pdf:
             page.clean_contents()
 
-    pdf.save(path.join(output_dir,filename))    
+    pdf.del_xml_metadata()
+    newpdf = fitz.open()
+    newpdf.insert_pdf(pdf, from_page=1, to_page=1)
+    #pdf.save(path.join(output_dir,filename))
+    newpdf.save(path.join(output_dir,filename)) 
+    pdf.close()
+    newpdf.close()  
     return
 
 
